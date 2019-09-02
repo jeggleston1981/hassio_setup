@@ -14,11 +14,11 @@
 - id: '1566912770091' # This automation was created with the GUI hence is't layout looks unsually
   alias: (Theatre) Power Saver Switch
   trigger:
-  - entity_id: binary_sensor.tv_power_control
+  - entity_id: binary_sensor.tv_power_control # This binary sensor was created in the mqtt switch setup it is the name that you choose 
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: binary_sensor.tv_power_control
+  - entity_id: binary_sensor.tv_power_control # This binary sensor was created in the mqtt switch setup it is the name that you choose
     from: 'on'
     platform: state
     to: 'off'
@@ -27,7 +27,7 @@
   - data:
       entity_id: switch.tv_theatre_room
     service: switch.toggle
-# The following 2 automations are to control the indicator light on my physical switch
+# The following 2 automations are to control the indicator light on my physical switch, if you don't have or want a light you don't need them
 - id: '1566912519601' # This automation was created with the GUI hence is't layout looks unsually
   alias: (Theatre) Power Ind Light-Turn On
   trigger:
@@ -38,7 +38,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.theatre_tv_power_indicator_light
+      entity_id: switch.theatre_tv_power_indicator_light # This binary sensor was created in the mqtt switch setup it is the name that you choose
     service: switch.turn_on
 - id: '1566912601550' # This automation was created with the GUI hence is't layout looks unsually
   alias: (Theatre) Power Ind Light-Turn Off
@@ -50,5 +50,5 @@
   condition: []
   action:
   - data:
-      entity_id: switch.theatre_tv_power_indicator_light
+      entity_id: switch.theatre_tv_power_indicator_light # This binary sensor was created in the mqtt switch setup it is the name that you choose
     service: switch.turn_off
