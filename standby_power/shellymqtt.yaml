@@ -1,13 +1,13 @@
 binary_sensor: #<device-id> is the last 6 digits of your shelly1 MAC address eg. /shelly1-BA71EE/
   - platform: mqtt
-    name: "TV Power Control"
+    name: "TV Power Control" #You will see this name in the automations file - you can make it what ever you want however make sure it's that same in the automations
     state_topic: "shellies/shelly1-<device-id>/input/0"
     qos: 1
     payload_on: "1"
     payload_off: "0"
 switch:
   - platform: mqtt
-    name: "Theatre TV Power Indicator Light"
+    name: "Theatre TV Power Indicator Light" #You will see this name in the automations file - you can make it what ever you want however make sure it's that same in the automations
     command_topic: "shellies/shelly1-<device-id>/relay/0/command"
     state_topic: "shellies/shelly1-<device-id>/relay/0"
     qos: 1
