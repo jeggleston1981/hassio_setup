@@ -10,3 +10,45 @@
   - service: switch.turn_off
     data:
       entity_id: switch.<tp-link-device-name>
+# This is the automation to turn the TP-link switch on and off with a physical switch
+- id: '1566912770091' # This automation was created with the GUI hence is't layout looks unsually
+  alias: (Theatre) Power Saver Switch
+  trigger:
+  - entity_id: binary_sensor.tv_power_control
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.tv_power_control
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.tv_theatre_room
+    service: switch.toggle
+# The following 2 automations are to control the indicator light on my physical switch
+- id: '1566912519601' # This automation was created with the GUI hence is't layout looks unsually
+  alias: (Theatre) Power Ind Light-Turn On
+  trigger:
+  - entity_id: switch.<tp-link-device-name>
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.theatre_tv_power_indicator_light
+    service: switch.turn_on
+- id: '1566912601550' # This automation was created with the GUI hence is't layout looks unsually
+  alias: (Theatre) Power Ind Light-Turn Off
+  trigger:
+  - entity_id: switch.<tp-link-device-name>
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.theatre_tv_power_indicator_light
+    service: switch.turn_off
