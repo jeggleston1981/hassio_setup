@@ -1,7 +1,7 @@
-binary_sensor:
+binary_sensor: #<device-id> is the last 6 digits of your shelly1 MAC address eg. /shelly1-BA71EE/
   - platform: mqtt
     name: "TV Power Control"
-    state_topic: "shellies/shelly1-<device-id>/input/0"#<device-id> is the last 6 digits of your shelly1 MAC address eg. /shelly1-BA71EE/
+    state_topic: "shellies/shelly1-<device-id>/input/0"
     qos: 1
     payload_on: "1"
     payload_off: "0"
