@@ -1,0 +1,12 @@
+tplink: #insert in configuration.yaml file
+  discovery: false
+  switch:
+    - host: <your-tplink-device-network-ip> #eg - 192.168.1.30
+# This wil create the following entities:
+# sensor.<tp_link_device_name>_amps
+# sensor.<tp_link_device_name>_kwh
+# sensor.<tp_link_device_name>_kwh
+# sensor.<tp_link_device_name>_volts
+# sensor.<tp_link_device_name>_watts - this is the sensor we will be using
+# <tp_link_device_name> is the name you create for your TP_link switch in the setup app
+# If you call your device TV Room in the app it will come out as "sensor.tv_rooom_watts" in home assistant 
