@@ -1,0 +1,12 @@
+- id: '1566913498474' # This is the random id home assistant make to display automation in the GUI
+  alias: (Theatre) Power Off - Set to 1 min
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.<tp-link-device-name>_watts
+    below: 50 # You can adjust this to suit your setup, but if your power falls below this level the switch will turn you TPlink off
+    for: "00:01:00" # This is the ammount of time that it must be below "50" in this case - it is set to 1min
+  condition: []
+  action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.<tp-link-device-name>
