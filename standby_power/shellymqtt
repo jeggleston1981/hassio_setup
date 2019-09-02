@@ -1,0 +1,15 @@
+binary_sensor:
+  - platform: mqtt
+    name: "TV Power Control"
+    state_topic: "shellies/shelly1-<device-id>/input/0"
+    qos: 1
+    payload_on: "1"
+    payload_off: "0"
+switch:
+  - platform: mqtt
+    name: "Theatre TV Power Indicator Light"
+    command_topic: "shellies/shelly1-B9F542/relay/0/command"
+    state_topic: "shellies/shelly1-B9F542/relay/0"
+    qos: 1
+    payload_on: "on"
+    payload_off: "off"
