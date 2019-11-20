@@ -1,0 +1,15 @@
+- platform: mqtt
+  schema: template
+  name: "<Dimmer Name>" # Choose your name
+  command_topic: "shellies/shellydimmer-F39D79/light/0/set" #Change ID to your dimmer id e.g F39D79 is the last 6 digits of your shelly dimmer MAC address
+  state_topic: "shellies/shellydimmer-F39D79/light/0/status"          #Change ID to your dimmer id
+  state_template: "{% if value_json.ison %}on{% else %}off{% endif %}"
+  command_off_template: '{"turn":"off"}'
+  command_on_template: >
+      {"turn": "on"
+      {%- if brightness is defined -%}
+      , "brightness": {{brightness | float | multiply(0.3922) | round(0)}}
+      {%- endif -%}
+      }
+  brightness_template: "{{ value_json.brightness | float | multiply(2.55) | round(0) }}"
+  qos: 1
