@@ -1,3 +1,4 @@
+# Copy and paste into light.yaml file or under light: in your configuration.yaml file
 - platform: mqtt
   schema: template
   name: "<Dimmer Name>" # Choose your name
@@ -8,7 +9,7 @@
   command_on_template: >
       {"turn": "on"
       {%- if brightness is defined -%}
-      , "brightness": {{brightness | float | multiply(0.3922) | round(0)}}
+      , "brightness": {{brightness | float | multiply(0.3882 + 1) | round(0)}}
       {%- endif -%}
       }
   brightness_template: "{{ value_json.brightness | float | multiply(2.55) | round(0) }}"
