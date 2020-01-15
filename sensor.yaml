@@ -3,7 +3,11 @@ sensor:
     name: "Sensor Name Power"
     state_topic: "shellies/shellydimmer-<last 6 digits of mac>/light/0/power"
     unit_of_measurement: "Watts"
+    qos: 1
   - platform: mqtt
     name: "Sensor Name Energy"
     state_topic: "shellies/shellydimmer-<last 6 digits of mac>/light/0/energy"
-    unit_of_measurement: "Watts/Min"
+    value_template: "{{ value|float / 60000 }}"
+    unit_of_measurement: "kWh"
+    qos: 1
+    
