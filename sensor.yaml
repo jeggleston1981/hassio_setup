@@ -1,0 +1,9 @@
+sensor:
+  - platform: mqtt
+    name: "Sensor Name Power"
+    state_topic: "shellies/shellydimmer-<last 6 digits of mac>/light/0/power"
+    unit_of_measurement: "Watts"
+  - platform: mqtt
+    name: "Sensor Name Energy"
+    state_topic: "shellies/shellydimmer-<last 6 digits of mac>/light/0/energy"
+    unit_of_measurement: "Watts/Min"
