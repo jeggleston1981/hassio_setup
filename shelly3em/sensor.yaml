@@ -1,0 +1,92 @@
+########################################### Shelly 3EM ############################################
+###### 5 Min blocks of energy usage via REST sensor
+- platform: rest
+  name: "red kwh"
+  resource: "http://<Local ip of your shelly 3em>/emeter/0/em_data.csv"
+  method: GET
+  value_template: "{{ value.split(',')[-2] | float/1000 }}"
+  scan_interval: 300
+  unit_of_measurement: 'Kwh'
+- platform: rest
+  name: "white kwh"
+  resource: "http://<Local ip of your shelly 3em>/emeter/1/em_data.csv"
+  method: GET
+  value_template: "{{ value.split(',')[-2] | float/1000 }}"
+  scan_interval: 300
+  unit_of_measurement: 'Kwh'
+- platform: rest
+  name: "blue kwh"
+  resource: "http://<Local ip of your shelly 3em>/emeter/2/em_data.csv"
+  method: GET
+  value_template: "{{ value.split(',')[-2] | float/1000 }}"
+  scan_interval: 300
+  unit_of_measurement: 'Kwh'
+###### Add the usage together
+- platform: template
+  sensors:
+    house_power:
+      unit_of_measurement: 'Kwh'
+      friendly_name: "House Power"
+      value_template: >
+        {% set redk = states('sensor.red_kwh') %}
+        {% set whitek = states('sensor.white_kwh') %}
+        {% set bluek = states('sensor.blue_kwh') %}
+        {{ float(redk) + float(whitek) + float(bluek) }}
+###### MQTT Instantaneous Power Sensor
+- platform: mqtt
+  name: "Red Phase Power"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/0/power" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+- platform: mqtt
+  name: "White Phase Power"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/1/power" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "Watts"
+- platform: mqtt
+  name: "Blue Phase Power"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/2/power" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "Watts"
+###### MQTT Instantaneous Voltage Sensor
+- platform: mqtt
+  name: "Red Phase Voltage"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/0/voltage" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "V"
+- platform: mqtt
+  name: "White Phase Voltage"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/1/voltage" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "V"
+- platform: mqtt
+  name: "Blue Phase Voltage"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/2/voltage" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "V"
+###### MQTT Instantaneous Power Factor Sensor
+- platform: mqtt
+  name: "Red PF"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/0/pf" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "PF"
+- platform: mqtt
+  name: "White PF"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/1/pf" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "PF"
+- platform: mqtt
+  name: "Blue PF"
+  state_topic: "shellies/shellyem3-DC4F22764698/emeter/2/pf" #Make sure to change to your Shelly's name eg. shellyem3-DC4F22764698
+  unit_of_measurement: "Watts"
+  unit_of_measurement: "PF"
+###### Template Sensor to add all 3 phases together
+- platform: template
+  sensors:
+    sum_power:
+      unit_of_measurement: 'W'
+      friendly_name: "Power"
+      value_template: >
+        {% set red = states('sensor.red_phase_power') %}
+        {% set white = states('sensor.white_phase_power') %}
+        {% set blue = states('sensor.blue_phase_power') %}
+        {{ float(red)|round(0) + float(white)|round(0) + float(blue)|round(0) }}
