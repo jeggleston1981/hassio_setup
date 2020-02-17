@@ -1,7 +1,10 @@
+# Make sure the indentation fits your lovelace setup
+# You will need to install mini-graph-card via the HACS
+# The sensor name match the sample names in the sensor file, you can obviously change these to suit your setup
   - title: Power Monitor
     cards:
       - type: vertical-stack
-        cards:
+        cards: ####### Voltage Cards
               - type: horizontal-stack
                 cards:
                   - type: custom:mini-graph-card
@@ -35,7 +38,7 @@
                       icon: false
                       name: false
               - type: horizontal-stack
-                cards:
+                cards:  ####### Power Factor Cards
                   - type: custom:mini-graph-card
                     entities:
                       - sensor.red_pf
@@ -66,6 +69,7 @@
                     show:
                       icon: false
                       name: false
+              ######## 3 x Phases on single line graph over 24 hours
               - type: custom:mini-graph-card
                 name: Power/Phase
                 icon: mdi:flash
@@ -87,6 +91,7 @@
                   labels_secondary: false
                   name: true
                   state: false
+              ##### Sum of all three phases on a single line graph
               - type: custom:mini-graph-card
                 entities:
                   - sensor.sum_power
@@ -101,6 +106,7 @@
                     color: orange
                   - value: 2500
                     color: red
+              #### Daily usage bar graph
               - type: custom:mini-graph-card
                 entities:
                   - entity: sensor.house_power
