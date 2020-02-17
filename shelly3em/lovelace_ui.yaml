@@ -1,0 +1,114 @@
+  - title: Power Monitor
+    cards:
+      - type: vertical-stack
+        cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.red_phase_voltage
+                    line_color: red
+                    line_width: 2
+                    font_size: 75
+                    decimals: 0
+                    show:
+                      icon: false
+                      name: false
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.blue_phase_voltage
+                    line_color: blue
+                    line_width: 2
+                    font_size: 75
+                    decimals: 0
+                    show:
+                      icon: false
+                      name: false
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.white_phase_voltage
+                    line_color: white
+                    line_width: 2
+                    font_size: 75
+                    decimals: 0
+                    show:
+                      icon: false
+                      name: false
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.red_pf
+                    line_color: red
+                    line_width: 2
+                    font_size: 75
+                    decimals: 2
+                    show:
+                      icon: false
+                      name: false
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.blue_pf
+                    line_color: blue
+                    line_width: 2
+                    font_size: 75
+                    decimals: 2
+                    show:
+                      icon: false
+                      name: false
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.white_pf
+                    line_color: white
+                    line_width: 2
+                    font_size: 75
+                    decimals: 2
+                    show:
+                      icon: false
+                      name: false
+              - type: custom:mini-graph-card
+                name: Power/Phase
+                icon: mdi:flash
+                hours_to_show: 24
+                entities:
+                  - entity: sensor.red_phase_power
+                    color: red
+                    show_points: false
+                  - entity: sensor.white_phase_power
+                    color: white
+                    show_points: false
+                  - entity: sensor.blue_phase_power
+                    color: blue
+                    show_points: false
+                line_width: 2
+                points_per_hour: 5
+                show:
+                  labels: false
+                  labels_secondary: false
+                  name: true
+                  state: false
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.sum_power
+                line_width: 2
+                name: Total Power
+                icon: mdi:flash
+                points_per_hour: 5
+                color_thresholds:
+                  - value: 600
+                    color: green
+                  - value: 1400
+                    color: orange
+                  - value: 2500
+                    color: red
+              - type: custom:mini-graph-card
+                entities:
+                  - entity: sensor.house_power
+                name: ENERGY CONSUMPTION
+                icon: mdi:spark
+                group_by: date
+                hours_to_show: 96
+                aggregate_func: sum
+                unit: 'Kw'
+                show:
+                  graph: bar
