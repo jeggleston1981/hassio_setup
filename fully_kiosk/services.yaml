@@ -1,0 +1,33 @@
+fully:
+  icon: "mdi-settings"
+  description: 'Up-date settings on Kitchen Tablet, entering no data with reload start URL'
+  fields:
+    brightness:
+      description: 'The brightness of the tablet backlight from 0-255, 0 the system default on the tablet'
+      example: 160
+    screen_time:
+      description: 'Turn screen off this amount of time the table has been idle in seconds'
+      example: 20
+    cmd:
+      description: "Send a command to fully kiosk, like 'screenOn' - 'triggerMotion' - 'restartApp' - 'exitApp' - 'loadStartUrl' any single cmd only with no variables."
+    motion_sen:
+      description: 'Sensitivity of visual motion dection 0-100'
+      example: 90
+    motion_on:
+      description: 'Turn on or off visual motion dection'
+      example: 'true'
+    acoustic_sen:
+      description: 'Sensitivity of acoustic motion dection 0-100'
+      example: 80
+    acoustic_on:
+      description: 'Turn on or off acoustic motion dection'
+      example: 'false'
+    dark_threshold:
+      description: 'The darkness threshold level at which the screen wont come on 0-100'
+      example: 50
+    dark_off:
+      description: 'Turn the screen off when is detects daarkness, at night time the screen wont come on'
+      example: 'false'
+    new_url:
+       description: 'Go to new URL page on Tablet, address must be url encoded'
+       example: 'http%3A%2F%2F192.168.1.236%3A8123%2Flovelace%2F10'
