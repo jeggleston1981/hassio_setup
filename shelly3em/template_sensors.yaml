@@ -1,0 +1,15 @@
+# Add this to your sensor.yaml file, don't create a file called template_sensors.yaml
+- platform: template
+  sensors:
+    energy_total:
+      friendly_name: 'Total Energy'
+      value_template: "{{ (states('sensor.red_phase_energy')|float + states('sensor.white_phase_energy')|float + states('sensor.blue_phase_energy')|float)|round(3) }}"
+      unit_of_measurement: "kWh"
+      availability_template: "{{ states('sensor.red_phase_energy') not in ['unknown','unavailable'] and states('sensor.white_phase_energy') not in ['unknown','unavailable'] and states('sensor.blue_phase_energy') not in ['unknown','unavailable'] }}"
+    power_total:
+      friendly_name: 'Total Power'
+      value_template: "{{ (states('sensor.red_phase_power')|float + states('sensor.white_phase_power')|float + states('sensor.blue_phase_power')|float)|round(3) }}"
+      unit_of_measurement: "W"
+    daily_power_cost:
+      friendly_name: 'Daily Power Cost'
+      value_template: "{{ (states('sensor.daily_energy')|float * 0.262026 + 0.9393)|round(2) }}"
